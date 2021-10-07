@@ -1,0 +1,10 @@
+server:
+  port: 8370
+datasource:
+  mysql:
+    url: jdbc:mysql://localhost:3306/tutorial
+    className: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    dialect: org.hibernate.dialect.MySQL8Dialect
+    showSql: true
