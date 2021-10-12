@@ -18,7 +18,7 @@ public class AccessDeniedEx implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-        String json = objectMapper.writeValueAsString(new BaseResponse(ResponseCode.ACCESS_DENIED));
+        String json = objectMapper.writeValueAsString(new BaseResponse(ResponseCode.ERROR_FORBIDDEN));
         httpServletResponse.setHeader("Content-Type", "application/json");
         httpServletResponse.getOutputStream().write(json.getBytes(StandardCharsets.UTF_8));
     }

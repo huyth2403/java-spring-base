@@ -10,7 +10,8 @@ public enum ResponseCode {
     ERROR("ERROR", "Lỗi không xác định"),
     ACCESS_DENIED("ACCESS_DENIED", "Truy cập bị từ chối"),
     SUCCESS("SUCCESS", "Thành công"),
-    ERROR_AUTH("ERROR_AUTH", "Tên tài khoản hoặc mật khẩu không chính xác");
+    ERROR_AUTH("ERROR_AUTH", "Tên tài khoản hoặc mật khẩu không chính xác"),
+    ERROR_FORBIDDEN("FORBIDDEN", "Bạn không có quyền truy cập API này");
 
     String errorCode;
     String message;

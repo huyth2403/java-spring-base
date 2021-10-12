@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 public class AuthenticationEntryPoint implements org.springframework.security.web.AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        String json = new ObjectMapper().writeValueAsString(new BaseResponse(ResponseCode.ERROR_AUTH));
+        String json = new ObjectMapper().writeValueAsString(new BaseResponse(ResponseCode.ACCESS_DENIED));
         httpServletResponse.setHeader("Content-Type", "application/json");
         httpServletResponse.getOutputStream().write(json.getBytes(StandardCharsets.UTF_8));
     }
