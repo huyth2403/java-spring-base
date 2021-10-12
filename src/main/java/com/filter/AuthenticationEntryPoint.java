@@ -1,4 +1,4 @@
-package com.config;
+package com.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.response.BaseResponse;

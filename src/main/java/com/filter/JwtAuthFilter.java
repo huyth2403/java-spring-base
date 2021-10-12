@@ -1,5 +1,6 @@
-package com.config.jwt;
+package com.filter;
 
+import com.config.jwt.JwtProvider;
 import com.dto.UserDto;
 import com.util.Common;
 import org.springframework.beans.factory.annotation.Autowired;

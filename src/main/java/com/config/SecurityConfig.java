@@ -1,6 +1,7 @@
 package com.config;
 
-import com.config.jwt.JwtAuthFilter;
+import com.filter.AuthenticationEntryPoint;
+import com.filter.JwtAuthFilter;
 import com.exception.AccessDeniedEx;
 import com.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
