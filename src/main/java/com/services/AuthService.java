@@ -8,6 +8,7 @@ import com.response.ResponseCode;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +33,9 @@ public class AuthService {
             UserDto userDto = modelMapper.map(principal, UserDto.class);
             String token = jwtProvider.generateToken(userDto);
             return BaseResponse.success(token);
+        } catch (BadCredentialsException e) {
+            e.printStackTrace();
+            return new BaseResponse(ResponseCode.ERROR_AUTH);
         } catch (Exception e) {
             e.printStackTrace();
             return new BaseResponse(ResponseCode.ERROR);
