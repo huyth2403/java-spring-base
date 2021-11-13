@@ -21,4 +21,9 @@ public class AuthController {
         return authService.login(user);
     }
 
+    @PostMapping("/register")
+    public BaseResponse register(@RequestBody User user) {
+        return authService.register(user);
+    }
+
 }

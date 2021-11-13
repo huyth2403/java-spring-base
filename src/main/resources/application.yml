@@ -8,3 +8,6 @@ datasource:
     password: 123456
     dialect: org.hibernate.dialect.MySQL8Dialect
     showSql: true
+
+security:
+  white_list: /api/auth/register,/api/auth/login
