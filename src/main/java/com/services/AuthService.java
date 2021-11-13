@@ -3,15 +3,18 @@ package com.services;
 import com.config.jwt.JwtProvider;
 import com.dto.UserDto;
 import com.entities.User;
+import com.repositories.UserRepository;
 import com.response.BaseResponse;
 import com.response.ResponseCode;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,6 +27,12 @@ public class AuthService {
 
     @Autowired
     private JwtProvider jwtProvider;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public BaseResponse login(User user) {
         try {
@@ -39,6 +48,17 @@ public class AuthService {
         } catch (Exception e) {
             e.printStackTrace();
             return new BaseResponse(ResponseCode.ERROR);
+        }
+    }
+
+    public BaseResponse register(User user) {
+        try {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user = userRepository.save(user);
+            return BaseResponse.success(user);
+        } catch (DataIntegrityViolationException e) {
+            e.printStackTrace();
+            return new BaseResponse(ResponseCode.ERROR_DUPLICATE_ENTRY);
         }
     }
 }
