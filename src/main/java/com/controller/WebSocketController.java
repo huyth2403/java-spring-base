@@ -16,7 +16,7 @@ public class WebSocketController {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @MessageMapping("/{rool}")
+    @MessageMapping("/{room}")
     public void sendMessage(@DestinationVariable("room") String room, @Payload String payload) {
         messagingTemplate.convertAndSend("/topic/" + room, payload);
     }
