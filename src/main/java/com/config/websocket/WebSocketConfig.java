@@ -31,7 +31,7 @@ import java.util.List;
 @Order(Ordered.HIGHEST_PRECEDENCE + 99)
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
-    @Value("${security.web.cors-mapping}")
+    @Value("${security.cors-mapping}")
     private String corsMapping;
 
     @Autowired
@@ -58,7 +58,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 if (StompCommand.CONNECT.equals(accessor.getCommand())) {
                     List<String> authorization = accessor.getNativeHeader("Authorization");
                     if (authorization.size() > 0 && authorization.get(0) != null) {
-                        String token = authorization.get(0).split(" ")[1];
+                        String token = authorization.get(0);
                         if ((StringUtils.hasText(token) && jwtProvider.validateToken(token))) {
                             UserDto userDataDto = jwtProvider.getUserFromJWT(token);
                             accessor.setUser(new UsernamePasswordAuthenticationToken(userDataDto.getUserId(), null, Arrays.asList(new SimpleGrantedAuthority("USER"))));

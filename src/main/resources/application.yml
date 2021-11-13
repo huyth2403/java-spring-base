@@ -11,3 +11,4 @@ datasource:
 
 security:
   white_list: /api/auth/register,/api/auth/login
+  cors-mapping: http://localhost:3000
