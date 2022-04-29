@@ -11,3 +11,8 @@ datasource:
     hbm2ddlAuto: update
 security:
   white_list: /api/auth/register,/api/auth/login
+
+logging.level.ROOT: INFO
+logging.level.org.springframework.orm.jpa: DEBUG
+logging.level.org.springframework.transaction: DEBUG
+logging.level.org.hibernate.engine.transaction.internal.TransactionImpl: DEBUG

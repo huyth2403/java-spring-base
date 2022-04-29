@@ -2,7 +2,9 @@ package com.services;
 
 import com.config.jwt.JwtProvider;
 import com.dto.UserDto;
+import com.entities.Student;
 import com.entities.User;
+import com.repositories.StudentRepository;
 import com.repositories.UserRepository;
 import com.response.BaseResponse;
 import com.response.ResponseCode;
@@ -16,6 +18,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthService {
@@ -33,6 +37,9 @@ public class AuthService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     public BaseResponse login(User user) {
         try {
@@ -60,5 +67,13 @@ public class AuthService {
             e.printStackTrace();
             return new BaseResponse(ResponseCode.ERROR_DUPLICATE_ENTRY);
         }
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void save1() {
+        System.out.println("save1");
+        Student s = new Student();
+        s.setName("save1");
+        studentRepository.save(s);
     }
 }
