@@ -27,7 +27,7 @@ public class DBConfig implements IDBConfig{
     private String password;
     private String dialect;
     private String showSql;
-
+    private String hbm2ddlAuto;
 
     @Override
     @Bean("ds1")
@@ -51,6 +51,7 @@ public class DBConfig implements IDBConfig{
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", dialect);
         properties.setProperty("hibernate.show_sql", showSql);
+        properties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
         entityManagerFactoryBean.setJpaProperties(properties);
         entityManagerFactoryBean.setPackagesToScan("com.entities");
         return entityManagerFactoryBean;
