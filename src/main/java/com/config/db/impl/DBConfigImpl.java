@@ -1,5 +1,6 @@
-package com.config;
+package com.config.db.impl;
 
+import com.config.IDBConfig;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -17,9 +18,9 @@ import java.util.Properties;
 
 @Configuration
 @Data
-@ConfigurationProperties(prefix = "datasource.mysql")
-@EnableJpaRepositories(basePackages = "com.repositories", transactionManagerRef = "ts1", entityManagerFactoryRef = "em1")
-public class DBConfig implements IDBConfig{
+@ConfigurationProperties(prefix = "datasource.mysql.db1")
+@EnableJpaRepositories(basePackages = "com.repositories.db1", transactionManagerRef = "ts1", entityManagerFactoryRef = "em1")
+public class DBConfigImpl implements IDBConfig {
 
     private String url;
     private String className;
@@ -53,7 +54,7 @@ public class DBConfig implements IDBConfig{
         properties.setProperty("hibernate.show_sql", showSql);
         properties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
         entityManagerFactoryBean.setJpaProperties(properties);
-        entityManagerFactoryBean.setPackagesToScan("com.entities");
+        entityManagerFactoryBean.setPackagesToScan("com.entities.db1");
         return entityManagerFactoryBean;
     }
 

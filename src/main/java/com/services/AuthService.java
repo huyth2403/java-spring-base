@@ -2,12 +2,14 @@ package com.services;
 
 import com.config.jwt.JwtProvider;
 import com.dto.UserDto;
-import com.entities.Student;
-import com.entities.User;
-import com.repositories.StudentRepository;
-import com.repositories.UserRepository;
+import com.entities.db1.User;
+import com.entities.db2.Profile;
+import com.repositories.db1.StudentRepository;
+import com.repositories.db1.UserRepository;
+import com.repositories.db2.ProfileRepository;
 import com.response.BaseResponse;
 import com.response.ResponseCode;
+import com.services.impl.UserServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,7 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -41,6 +43,12 @@ public class AuthService {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
+    private UserServiceImpl userService;
+
     public BaseResponse login(User user) {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
@@ -58,22 +66,18 @@ public class AuthService {
         }
     }
 
+    @Transactional
     public BaseResponse register(User user) {
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            user = userRepository.save(user);
+            user = userService.saveOrUpdate(user);
+            Profile profile = new Profile();
+            profile.setUserId(user.getUserId());
+            profileRepository.save(profile);
             return BaseResponse.success(user);
         } catch (DataIntegrityViolationException e) {
-            e.printStackTrace();
+            System.out.println("Error: " + ResponseCode.ERROR_DUPLICATE_ENTRY.getMessage());
             return new BaseResponse(ResponseCode.ERROR_DUPLICATE_ENTRY);
         }
-    }
-
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void save1() {
-        System.out.println("save1");
-        Student s = new Student();
-        s.setName("save1");
-        studentRepository.save(s);
     }
 }

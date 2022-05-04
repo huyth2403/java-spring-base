@@ -3,7 +3,7 @@ package com.config;
 import com.filter.AuthenticationEntryPoint;
 import com.filter.JwtAuthFilter;
 import com.exception.AccessDeniedEx;
-import com.services.UserDetailsServiceImpl;
+import com.services.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

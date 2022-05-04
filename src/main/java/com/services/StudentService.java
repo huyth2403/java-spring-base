@@ -1,6 +1,6 @@
 package com.services;
 
-import com.entities.Student;
+import com.entities.db1.Student;
 
 public interface StudentService {
     String save(Student student);

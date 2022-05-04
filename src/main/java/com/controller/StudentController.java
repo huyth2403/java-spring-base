@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.entities.Student;
+import com.entities.db1.Student;
 import com.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

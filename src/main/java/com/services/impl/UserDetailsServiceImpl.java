@@ -1,7 +1,7 @@
-package com.services;
+package com.services.impl;
 
-import com.entities.User;
-import com.repositories.UserRepository;
+import com.entities.db1.User;
+import com.repositories.db1.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,9 +1,10 @@
 package com.controller;
 
-import com.entities.User;
+import com.entities.db1.User;
 import com.response.BaseResponse;
 import com.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.entities;
+package com.entities.db1;
 
 import com.util.Common;
 import lombok.Data;
@@ -19,6 +19,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long userId;
+    @Column(name = "username", unique = true, nullable = false)
     private String username;
     private String password;
     private String role;
